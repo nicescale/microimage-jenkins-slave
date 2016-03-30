@@ -2,7 +2,7 @@
 
 set -e
 
-export CON_NAME=jenkins_t
+export CON_NAME=jenkins_slave_t
 export REG_URL=index.csphere.cn
 export IMAGE=microimages/jenkins-slave
 export TAGS="2.53"
