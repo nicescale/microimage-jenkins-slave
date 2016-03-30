@@ -18,10 +18,6 @@ $ docker run -v ${JENKINS_HOME}:/var/jenkins_home \
 
 jenkins-slave这个slave节点会自动加入到jenkins master，注意secret参数的获取
 
-## jenkins管理员用户
-
-jenkins镜像启动后，打开浏览器 `http://your-ip:8080` , 会提示输入用户名密码，这里默认用户名admin，密码admin。进入后在 `用户` 菜单里修改密码。
-
 ## 授权和法律
 
 该镜像由希云制造，未经允许，任何第三方企业和个人，不得重新分发。违者必究。
