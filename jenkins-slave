@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Usage jenkins-slave.sh [options] -url http://jenkins SECRET SLAVE_NAME
+# Optional environment variables :
+# * JENKINS_TUNNEL : HOST:PORT for a tunnel to route TCP traffic to jenkins host, when jenkins can't be directly accessed over network
+# * JENKINS_URL : alternate jenkins URL
+
+if [[ $# -eq 1 ]]; then
+
+	# if `docker run` only has one arguments, we assume user is running alternate command like `bash` to inspect the image
+	exec "$@"
+
+else
+
+	# if -tunnel is not provided try env vars
+	if [[ "$@" != *"-tunnel "* ]]; then
+		if [[ ! -z "$JENKINS_TUNNEL" ]]; then
+			TUNNEL="-tunnel $JENKINS_TUNNEL"		
+		fi
+	fi
+
+	if [[ ! -z "$JENKINS_URL" ]]; then
+		URL="-url $JENKINS_URL"
+	fi
+
+	exec java $JAVA_OPTS -cp /usr/share/jenkins/slave.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL "$@"
+fi
